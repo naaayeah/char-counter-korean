@@ -23,25 +23,31 @@
 </head>
 <body>
 
-    <h3>한글 글자 수 세기</h3>
+    <h3>글자 수 세기</h3>
     <textarea id="text-input" placeholder="여기에 텍스트를 입력하세요..."></textarea>
+    <div class="counter">글자 수 (모든 글자 포함): <span id="total-char-count">0</span></div>
     <div class="counter">글자 수 (띄어쓰기 포함): <span id="char-count-with-spaces">0</span></div>
     <div class="counter">글자 수 (띄어쓰기 제외): <span id="char-count-no-spaces">0</span></div>
 
     <script>
         const textInput = document.getElementById('text-input');
+        const totalCharCount = document.getElementById('total-char-count');
         const charCountWithSpaces = document.getElementById('char-count-with-spaces');
         const charCountNoSpaces = document.getElementById('char-count-no-spaces');
 
         textInput.addEventListener('input', () => {
             const text = textInput.value;
 
+            // 전체 글자 수 계산
+            const totalCharacters = text.length;
+
             // 띄어쓰기 포함한 글자 수 계산
-            const koreanCharCountWithSpaces = text.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣\s]/g, "").length;
+            const koreanCharCountWithSpaces = text.length;
 
             // 띄어쓰기 제외한 글자 수 계산
-            const koreanCharCountNoSpaces = text.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, "").length;
+            const koreanCharCountNoSpaces = text.replace(/\s/g, "").length;
 
+            totalCharCount.textContent = totalCharacters;
             charCountWithSpaces.textContent = koreanCharCountWithSpaces;
             charCountNoSpaces.textContent = koreanCharCountNoSpaces;
         });
